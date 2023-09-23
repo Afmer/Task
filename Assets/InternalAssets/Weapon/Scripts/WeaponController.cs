@@ -22,6 +22,8 @@ namespace Task.Character.Weapon
         private float _rateFirePerMinute = 200;
         [SerializeField]
         private float _bulletSpeed = 20;
+        [SerializeField]
+        private float _damage = 5;
         private float _timeForNextShoot;
         private LinkedListNode<Bullet> _currentBullet;
         private LinkedList<Bullet> _bulletsPool = new();
@@ -40,7 +42,7 @@ namespace Task.Character.Weapon
             if (Time.time > _timeForNextShoot)
             {
                 _currentBullet.Value.transform.position = _bulletSpawn.position;
-                _currentBullet.Value.Launch(Direction, _bulletSpeed);
+                _currentBullet.Value.Launch(Direction, _bulletSpeed, _damage);
                 if (_currentBullet.Next != null)
                     _currentBullet = _currentBullet.Next;
                 else

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Task.Interfaces;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,8 +11,11 @@ namespace Task.Character.Weapon
     {
         [SerializeField]
         private int _launchTimeSeconds;
+        [SerializeField]
+        private Rigidbody2D _rigidBody;
         private float _endLaunchTime;
         private Vector3? _strengthVector;
+        private float _damage;
         void Start()
         {
             transform.gameObject.SetActive(false);
@@ -22,16 +26,18 @@ namespace Task.Character.Weapon
         {
             if(_strengthVector != null)
             {
-                transform.Translate(_strengthVector.Value * Time.deltaTime, Space.World);
+                var tempMove = _strengthVector.Value * Time.deltaTime;
+                _rigidBody.MovePosition(_rigidBody.position + new Vector2(tempMove.x, tempMove.y));
                 if(Time.time > _endLaunchTime)
                 {
                     _strengthVector = null;
                     transform.gameObject.SetActive(false);
                     _endLaunchTime = 0;
+                    _damage = 0;
                 }
             }
         }
-        public void Launch(BulletDirectionEnum direction, float speed)
+        public void Launch(BulletDirectionEnum direction, float speed, float damage)
         {
             var currentTime = Time.time;
             _endLaunchTime = currentTime + _launchTimeSeconds;
@@ -54,6 +60,18 @@ namespace Task.Character.Weapon
                     throw new System.Exception("Direction error");
             }
             transform.gameObject.SetActive(true);
+            _damage = damage;
+        }
+        public void OnTriggerEnter2D(Collider2D collision)
+        {
+            if(collision.CompareTag("Hitbox"))
+            {
+                Hitbox hitbox;
+                if(collision.gameObject.TryGetComponent(out hitbox))
+                {
+                    hitbox.Heat(_damage);
+                }
+            }
         }
     }
 }
