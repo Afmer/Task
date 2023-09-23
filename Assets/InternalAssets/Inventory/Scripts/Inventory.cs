@@ -1,16 +1,17 @@
 using System;
 using System.Runtime.CompilerServices;
+using Task.Interfaces;
 using Task.Inventory.Interfaces;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 namespace Task.Inventory
 {
-    public class Inventory : MonoBehaviour
+    public class Inventory : MonoBehaviour, IInventory
     {
         [SerializeField]
         private int _inventorySize = 10;
         private IItem[] _items;
+        private IItem _itemPickUp;
         // Start is called before the first frame update
         void Start()
         {
@@ -36,6 +37,30 @@ namespace Task.Inventory
                 }
             }
             return false;
+        }
+        public void PickUp()
+        {
+            if (_itemPickUp != null && InsertItem(_itemPickUp))
+            {
+                _itemPickUp.PickUp();
+                _itemPickUp = null;
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Item"))
+            {
+                IItem item;
+                if (collision.gameObject.TryGetComponent(out item))
+                {
+                    _itemPickUp = item;
+                }
+            }
+        }
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            _itemPickUp = null;
         }
     }
 }

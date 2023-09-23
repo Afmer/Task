@@ -9,6 +9,9 @@ namespace Task.Controllers
         private GameObject _character;
         [SerializeField]
         private GameObject _weaponObject;
+        [SerializeField]
+        private GameObject _inventoryObject;
+        private IInventory _inventory;
         private IMovement _movement;
         private IWeapon _weapon;
         void Start()
@@ -23,6 +26,11 @@ namespace Task.Controllers
                 Debug.LogError("Weapon not found", this);
                 throw new System.Exception("Weapon not found");
             }
+            if(!_inventoryObject.TryGetComponent(out _inventory))
+            {
+                Debug.LogError("Inventory not found", this);
+                throw new System.Exception("Inventory not found");
+            }
         }
         void Update()
         {
@@ -32,6 +40,10 @@ namespace Task.Controllers
             if(Input.GetKey(KeyCode.Mouse0))
             {
                 _weapon.Shoot();
+            }
+            if(Input.GetKey(KeyCode.E))
+            {
+                _inventory.PickUp();
             }
         }
     }
