@@ -4,5 +4,7 @@ namespace Task.Interfaces
     {
         public void PickUp();
         public IItem[] GetAll();
+        public void DeleteItem(IItem item);
+        public void DeleteItem(int index);
     }
 }

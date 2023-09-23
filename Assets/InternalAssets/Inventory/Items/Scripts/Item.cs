@@ -12,13 +12,14 @@ namespace Task.Inventory.Item
 
         public Sprite Sprite => _sprite;
 
+        public void Delete()
+        {
+            Destroy(gameObject);
+        }
+
         public void PickUp()
         {
             gameObject.SetActive(false);
-        }
-
-        private void Start()
-        {
         }
     }
 }

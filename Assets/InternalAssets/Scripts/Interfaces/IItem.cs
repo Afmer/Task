@@ -7,5 +7,6 @@ namespace Task.Interfaces
         public string Name { get; }
         public Sprite Sprite { get; }
         public void PickUp();
+        public void Delete();
     }
 }
