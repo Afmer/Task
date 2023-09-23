@@ -52,6 +52,10 @@ namespace Task.Inventory
                 _itemPickUp = null;
             }
         }
+        public IItem[] GetAll()
+        {
+            return _items;
+        }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {

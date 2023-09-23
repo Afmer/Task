@@ -10,7 +10,7 @@ namespace Task.Inventory.Item
         private Sprite _sprite;
         public string Name => _name;
 
-        public Texture2D Texture => _sprite.texture;
+        public Sprite Sprite => _sprite;
 
         public void PickUp()
         {

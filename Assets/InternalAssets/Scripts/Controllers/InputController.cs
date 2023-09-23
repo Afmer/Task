@@ -11,9 +11,13 @@ namespace Task.Controllers
         private GameObject _weaponObject;
         [SerializeField]
         private GameObject _inventoryObject;
+        [SerializeField]
+        private GameObject _inventoryUIControllerObject;
+        private IInventoryUI _inventoryUIController;
         private IInventory _inventory;
         private IMovement _movement;
         private IWeapon _weapon;
+        private bool isInventoryOpen = false;
         void Start()
         {
             if (!_character.TryGetComponent(out _movement))
@@ -31,6 +35,11 @@ namespace Task.Controllers
                 Debug.LogError("Inventory not found", this);
                 throw new System.Exception("Inventory not found");
             }
+            if(!_inventoryUIControllerObject.TryGetComponent(out _inventoryUIController))
+            {
+                Debug.LogError("InventoryUIController not found", this);
+                throw new System.Exception("InventoryUIController not found");
+            }
         }
         void Update()
         {
@@ -44,6 +53,19 @@ namespace Task.Controllers
             if(Input.GetKey(KeyCode.E))
             {
                 _inventory.PickUp();
+            }
+            if(Input.GetKeyDown(KeyCode.I))
+            {
+                if (isInventoryOpen)
+                {
+                    _inventoryUIController.CloseInventory();
+                    isInventoryOpen = false;
+                }
+                else
+                {
+                    _inventoryUIController.OpenInventory();
+                    isInventoryOpen = true;
+                }
             }
         }
     }
