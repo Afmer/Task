@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Task.Inventory.Interfaces
+namespace Task.Interfaces
 {
     public interface IItem
     {

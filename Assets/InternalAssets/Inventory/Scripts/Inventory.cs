@@ -1,7 +1,6 @@
 using System;
 using System.Runtime.CompilerServices;
 using Task.Interfaces;
-using Task.Inventory.Interfaces;
 using UnityEngine;
 using UnityEngine.Events;
 

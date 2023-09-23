@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Task.Inventory.Interfaces;
+using Task.Interfaces;
 using UnityEngine;
 namespace Task.Inventory.Item
 {
