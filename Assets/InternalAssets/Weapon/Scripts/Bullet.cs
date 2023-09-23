@@ -12,7 +12,6 @@ namespace Task.Character.Weapon
         private int _launchTimeSeconds;
         private float _endLaunchTime;
         private Vector3? _strengthVector;
-        private UnityEvent<Collider2D> _hitEvent;
         void Start()
         {
             transform.gameObject.SetActive(false);
@@ -29,14 +28,12 @@ namespace Task.Character.Weapon
                     _strengthVector = null;
                     transform.gameObject.SetActive(false);
                     _endLaunchTime = 0;
-                    _hitEvent = null;
                 }
             }
         }
-        public void Launch(BulletDirectionEnum direction, float speed, UnityEvent<Collider2D> hitEvent)
+        public void Launch(BulletDirectionEnum direction, float speed)
         {
             var currentTime = Time.time;
-            _hitEvent= hitEvent;
             _endLaunchTime = currentTime + _launchTimeSeconds;
             switch(direction)
             {
@@ -57,13 +54,6 @@ namespace Task.Character.Weapon
                     throw new System.Exception("Direction error");
             }
             transform.gameObject.SetActive(true);
-        }
-        public void OnTriggerEnter2D(Collider2D collider)
-        {
-            if(_hitEvent != null)
-            {
-                _hitEvent.Invoke(collider);
-            }
         }
     }
 }

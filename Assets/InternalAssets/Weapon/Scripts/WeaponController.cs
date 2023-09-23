@@ -8,7 +8,6 @@ namespace Task.Character.Weapon
 {
     public class WeaponController : MonoBehaviour, IWeapon
     {
-        public UnityEvent<Collider2D> OnBulletHit { get; private set; } = new();
         [SerializeField]
         private Transform _bulletSpawn;
         [SerializeField]
@@ -41,7 +40,7 @@ namespace Task.Character.Weapon
             if (Time.time > _timeForNextShoot)
             {
                 _currentBullet.Value.transform.position = _bulletSpawn.position;
-                _currentBullet.Value.Launch(Direction, _bulletSpeed, OnBulletHit);
+                _currentBullet.Value.Launch(Direction, _bulletSpeed);
                 if (_currentBullet.Next != null)
                     _currentBullet = _currentBullet.Next;
                 else
