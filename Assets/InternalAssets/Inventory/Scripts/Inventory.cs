@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using Task.Interfaces;
 using Task.Inventory.Interfaces;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Task.Inventory
 {
@@ -10,11 +11,15 @@ namespace Task.Inventory
     {
         [SerializeField]
         private int _inventorySize = 10;
+        [SerializeField]
+        private UnityEvent<IItem> _onPickUp;
+        public event Action<IItem> OnPickUp;
         private IItem[] _items;
         private IItem _itemPickUp;
         // Start is called before the first frame update
         void Start()
         {
+            OnPickUp += x => { return; };
             _items = new IItem[_inventorySize];
             if (_inventorySize <= 0)
             {
@@ -43,6 +48,8 @@ namespace Task.Inventory
             if (_itemPickUp != null && InsertItem(_itemPickUp))
             {
                 _itemPickUp.PickUp();
+                OnPickUp(_itemPickUp);
+                _onPickUp.Invoke(_itemPickUp);
                 _itemPickUp = null;
             }
         }
