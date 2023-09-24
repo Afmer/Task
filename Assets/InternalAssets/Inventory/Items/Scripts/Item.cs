@@ -2,7 +2,7 @@ using Task.Interfaces;
 using UnityEngine;
 namespace Task.Inventory.Item
 {
-    public class Item : MonoBehaviour, IItem
+    public class Item : MonoBehaviour, IItem, IDropItem
     {
         [SerializeField]
         private string _name;
@@ -24,6 +24,10 @@ namespace Task.Inventory.Item
         public void PickUp()
         {
             gameObject.SetActive(false);
+        }
+        public IDropItem Spawn(Vector2 position, Quaternion rotation, Transform relative)
+        {
+            return Instantiate(this, position, rotation, relative);
         }
     }
 }
