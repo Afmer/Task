@@ -9,16 +9,18 @@ namespace Task.MonsterManager
         [SerializeField]
         private event Action<ISpawnableEntity> _onMonsterDead;
         public event Action<ISpawnableEntity> OnMonsterDead;
+        public Vector2 SpawnPoint;
         private ISpawnableEntity _monsterPrefab;
-        private Transform _spawnPoint;
-        public Spawn(ISpawnableEntity monster, Transform spawnPoint)
+        private Transform _relative;
+        public Spawn(ISpawnableEntity monster, Vector2 spawnPoint, Transform relative = null)
         {
             _monsterPrefab = monster;
-            _spawnPoint = spawnPoint;
+            SpawnPoint = spawnPoint;
+            _relative = relative;
         }
         public void SpawnMonster()
         {
-            var monster = _monsterPrefab.Spawn(_spawnPoint.position, _spawnPoint.rotation, _spawnPoint);
+            var monster = _monsterPrefab.Spawn(SpawnPoint, Quaternion.Euler(0, 0, 0), _relative);
             monster.OnDead += MonsterOnDead;
         }
 
