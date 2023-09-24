@@ -23,7 +23,10 @@ namespace Task.Inventory.UI
             _item = stack;
             _icon.sprite = stack.Icon;
             _text.text = stack.ItemName;
-            _count.text = stack.Count.ToString();
+            if (stack.Count > 1)
+                _count.text = stack.Count.ToString();
+            else
+                _count.text = null;
             Index = index;
         }
         public void Clear()
