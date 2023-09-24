@@ -5,7 +5,7 @@ using Task.Interfaces;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Task.Monster
+namespace Task.MonsterManager
 {
     public class Monster : MonoBehaviour, IHeat
     {
