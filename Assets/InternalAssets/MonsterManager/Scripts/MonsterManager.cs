@@ -1,3 +1,4 @@
+using System.Collections;
 using Task.Interfaces;
 using UnityEngine;
 namespace Task.MonsterManager
@@ -49,7 +50,8 @@ namespace Task.MonsterManager
                     if(_killedMonsters >= _monstersObjects.Length)
                     {
                         _killedMonsters = 0;
-                        Respawn();
+                        StartCoroutine(Respawn(5));
+                        Respawn(5);
                     }
                     localDrop.InitDrop(x.Position);
                 };
@@ -57,14 +59,24 @@ namespace Task.MonsterManager
             }
         }
 
-        public void Respawn()
+        public IEnumerator Respawn(float time)
         {
-            foreach(var spawn in _spawns)
+            float endTime = Time.time + time;
+            while (true)
             {
-                var randX = Random.Range(_minX, _maxX);
-                var randY = Random.Range(_minY, _maxY);
-                spawn.SpawnPoint = new Vector2(randX, randY);
-                spawn.SpawnMonster();
+                if(Time.time < endTime)
+                {
+                    yield return null;
+                    continue;
+                }
+                foreach (var spawn in _spawns)
+                {
+                    var randX = Random.Range(_minX, _maxX);
+                    var randY = Random.Range(_minY, _maxY);
+                    spawn.SpawnPoint = new Vector2(randX, randY);
+                    spawn.SpawnMonster();
+                }
+                break;
             }
         }
     }
