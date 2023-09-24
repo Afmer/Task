@@ -31,17 +31,6 @@ namespace Task.Inventory
             _items[index].Delete();
             _items[index] = null;
         }
-        public void DeleteItem(IItem item)
-        {
-            for(int i = 0; i < _items.Length; i++)
-            {
-                if (ReferenceEquals(_items[i], item))
-                {
-                    _items[i].Delete();
-                    _items[i] = null;
-                }
-            }
-        }
         public bool InsertItem(IItem item)
         {
             for (int i = 0; i < _items.Length; i++)
