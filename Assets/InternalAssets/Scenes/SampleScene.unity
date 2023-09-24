@@ -5283,10 +5283,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c6dcd6cdbee03b409696bd99aafeb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnsTransform:
-  - {fileID: 1452897013}
-  - {fileID: 1517061648}
-  - {fileID: 2008105460}
   _monstersObjects:
   - {fileID: 736507695982257883, guid: 8011f43a5ae483f459e7ca2c2c5747f1, type: 3}
   - {fileID: 736507695982257883, guid: 8011f43a5ae483f459e7ca2c2c5747f1, type: 3}
@@ -5295,6 +5291,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 520ca1f23a16ef645b462803c8ce6270, type: 2}
   - {fileID: 11400000, guid: 520ca1f23a16ef645b462803c8ce6270, type: 2}
   - {fileID: 11400000, guid: 520ca1f23a16ef645b462803c8ce6270, type: 2}
+  _startRectPoint: {fileID: 1452897013}
+  _endRectPoint: {fileID: 1517061648}
 --- !u!4 &1147770168
 Transform:
   m_ObjectHideFlags: 0
@@ -5309,7 +5307,6 @@ Transform:
   m_Children:
   - {fileID: 1452897013}
   - {fileID: 1517061648}
-  - {fileID: 2008105460}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6371,7 +6368,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1452897012}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.27, y: 0.52, z: 0}
+  m_LocalPosition: {x: 12.04, y: 0.52, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6402,7 +6399,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1517061647}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.57, z: 0}
+  m_LocalPosition: {x: -2.08, y: -3.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8055,37 +8052,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &2008105459
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2008105460}
-  m_Layer: 0
-  m_Name: Spawn 3
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2008105460
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2008105459}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.15, y: -1.47, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1147770168}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2068338612
 GameObject:
   m_ObjectHideFlags: 0
@@ -8234,4 +8200,6 @@ MonoBehaviour:
   _bulletPrefab: {fileID: 6901218853827045857, guid: 86593f502978dff42aec6602acb3b481, type: 3}
   _rateFirePerMinute: 600
   _bulletSpeed: 300
-  _damage: 5
+  _damage: 25
+  _clip: 30
+  _reloadTime: 3
