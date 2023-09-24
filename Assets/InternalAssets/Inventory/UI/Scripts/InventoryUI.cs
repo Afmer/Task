@@ -39,7 +39,7 @@ namespace Task.Inventory.UI
             CloseInventory();
         }
 
-        private void OnItemDelete(IItem item, int index)
+        private void OnItemDelete(Stack item, int index)
         {
             _inventory.DeleteItem(index);
             _cells[index].Clear();
@@ -61,12 +61,12 @@ namespace Task.Inventory.UI
             {
                 if (items[i] != null)
                 {
-                    var localItem = items[i];
+                    var localStack = items[i];
                     var localIndex = i;
-                    _cells[i].SetItem(items[i], i);
+                    _cells[i].SetStack(items[i], i);
                     _cells[i].ItemButton.onClick.AddListener(() =>
                     {
-                        _itemController.Open(localItem, localIndex);
+                        _itemController.Open(localStack, localIndex);
                     });
                 }
             }

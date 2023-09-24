@@ -14,13 +14,13 @@ namespace Task.Inventory.UI
         [SerializeField]
         private Button _itemButton;
         public Button ItemButton { get { return _itemButton; } }
-        private IItem _item;
+        private Stack _item;
         public int Index { get; private set; }
-        public void SetItem(IItem item, int index)
+        public void SetStack(Stack stack, int index)
         {
-            _item = item;
-            _icon.sprite = item.Sprite;
-            _text.text = item.Name;
+            _item = stack;
+            _icon.sprite = stack.Icon;
+            _text.text = stack.ItemName;
             Index = index;
         }
         public void Clear()

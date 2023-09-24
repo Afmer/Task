@@ -18,15 +18,15 @@ namespace Task.Inventory.UI
         [SerializeField]
         private Button _closeButton;
         [SerializeField]
-        private UnityEvent<IItem> _onOpen;
+        private UnityEvent<Stack> _onOpen;
         [SerializeField]
         private UnityEvent _onClose;
         [SerializeField]
-        private UnityEvent<IItem, int> _onDelete;
-        private IItem _currentItem;
+        private UnityEvent<Stack, int> _onDelete;
+        private Stack _currentItem;
         private int? _currentItemIndex;
-        public event Action<IItem, int> OnDelete;
-        public event Action<IItem> OnOpen;
+        public event Action<Stack, int> OnDelete;
+        public event Action<Stack> OnOpen;
         public event Action OnClose;
         private void Start()
         {
@@ -44,14 +44,14 @@ namespace Task.Inventory.UI
             Close();
         }
 
-        public void Open(IItem item, int index)
+        public void Open(Stack stack, int index)
         {
-            _onOpen.Invoke(item);
-            OnOpen(item);
-            _icon.sprite = item.Sprite;
-            _name.text= item.Name;
+            _onOpen.Invoke(stack);
+            OnOpen(stack);
+            _icon.sprite = stack.Icon;
+            _name.text= stack.ItemName;
             gameObject.SetActive(true);
-            _currentItem = item;
+            _currentItem = stack;
             _currentItemIndex = index;
         }
         public void Close()

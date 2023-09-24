@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: "\u0412\u043E\u0435\u043D\u043D\u044B\u0439 \u0448\u043B\u0435\u043C"
   _sprite: {fileID: 21300000, guid: 984a0c77afca0c644ab712e53a742a24, type: 3}
+  _id: 1
 --- !u!61 &8050664424452322486
 BoxCollider2D:
   m_ObjectHideFlags: 0

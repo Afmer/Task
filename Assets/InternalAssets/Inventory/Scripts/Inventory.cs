@@ -13,13 +13,13 @@ namespace Task.Inventory
         [SerializeField]
         private UnityEvent<IItem> _onPickUp;
         public event Action<IItem> OnPickUp;
-        private IItem[] _items;
+        private Stack[] _items;
         private IItem _itemPickUp;
         // Start is called before the first frame update
         void Start()
         {
             OnPickUp += x => { return; };
-            _items = new IItem[_inventorySize];
+            _items = new Stack[_inventorySize];
             if (_inventorySize <= 0)
             {
                 Debug.LogError("Inventory size error\nInventory cannot be less than or equal to zero", this);
@@ -28,20 +28,43 @@ namespace Task.Inventory
         }
         public void DeleteItem(int index)
         {
-            _items[index].Delete();
-            _items[index] = null;
+            var stack = _items[index];
+            if (stack != null)
+            {
+                if (!stack.IsEmpty())
+                {
+                    var item = stack.Pop();
+                    item.Delete();
+                    if (stack.IsEmpty())
+                        _items[index] = null;
+                }
+                else
+                    _items[index] = null;
+            }
+            else
+                throw new Exception("Item not found");
         }
         public bool InsertItem(IItem item)
         {
+            int firstEmptyCellIndex = -1;
             for (int i = 0; i < _items.Length; i++)
             {
-                if (_items[i] == null)
+                bool isCanPush = _items[i] != null && _items[i].ItemID == item.Id && _items[i].IsFreeSpace();
+                if (isCanPush)
                 {
-                    _items[i] = item;
+                    _items[i].Push(item);
                     return true;
                 }
+                else if(firstEmptyCellIndex == -1 && _items[i] == null)
+                    firstEmptyCellIndex = i;
             }
-            return false;
+            if (firstEmptyCellIndex >= 0)
+            {
+                _items[firstEmptyCellIndex] = new Stack(item);
+                return true;
+            }
+            else
+                return false;
         }
         public void PickUp()
         {
@@ -53,7 +76,7 @@ namespace Task.Inventory
                 _itemPickUp = null;
             }
         }
-        public IItem[] GetAll()
+        public Stack[] GetAll()
         {
             return _items;
         }
