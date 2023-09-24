@@ -13,6 +13,8 @@ namespace Task.Inventory.UI
         private TextMeshProUGUI _text;
         [SerializeField]
         private Button _itemButton;
+        [SerializeField]
+        private TextMeshProUGUI _count;
         public Button ItemButton { get { return _itemButton; } }
         private Stack _item;
         public int Index { get; private set; }
@@ -21,6 +23,7 @@ namespace Task.Inventory.UI
             _item = stack;
             _icon.sprite = stack.Icon;
             _text.text = stack.ItemName;
+            _count.text = stack.Count.ToString();
             Index = index;
         }
         public void Clear()
@@ -29,6 +32,7 @@ namespace Task.Inventory.UI
             _icon.sprite = null;
             _text.text = null;
             Index = -1;
+            _count.text = null;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Task.Inventory
     {
         private Stack<IItem> _items = new();
         public int MaxSize { get; private set; }
-        public int CurrentSize => _items.Count;
+        public int Count => _items.Count;
         public int ItemID { get; private set; }
         public Sprite Icon { get; private set; }
         public string ItemName;

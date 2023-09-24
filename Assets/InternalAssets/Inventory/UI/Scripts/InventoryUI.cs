@@ -42,7 +42,10 @@ namespace Task.Inventory.UI
         private void OnItemDelete(Stack item, int index)
         {
             _inventory.DeleteItem(index);
-            _cells[index].Clear();
+            if (item.IsEmpty())
+                _cells[index].Clear();
+            else
+                _cells[index].SetStack(item, index);
         }
 
         public void OpenInventory()
