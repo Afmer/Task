@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 using Task.Interfaces;
 using UnityEngine;
 using UnityEngine.Events;
@@ -66,7 +65,22 @@ namespace Task.Inventory
             else
                 return false;
         }
-        public void PickUp()
+        public bool InsertItem(IItem item, int index)
+        {
+            if(index < 0 || index >= _items.Length)
+            {
+                Debug.LogError("Inventory index out of range", this);
+                throw new ArgumentOutOfRangeException("Inventory index out of range");
+            }
+            if (_items[index] == null)
+                _items[index] = new Stack(item);
+            else if (_items[index].ItemID == item.Id && _items[index].IsFreeSpace())
+                _items[index].Push(item);
+            else
+                return false;
+            return true;
+        }
+        public bool PickUp()
         {
             if (_itemPickUp != null && InsertItem(_itemPickUp))
             {
@@ -74,7 +88,10 @@ namespace Task.Inventory
                 OnPickUp(_itemPickUp);
                 _onPickUp.Invoke(_itemPickUp);
                 _itemPickUp = null;
+                return true;
             }
+            else
+                return false;
         }
         public IStack[] GetAll()
         {
