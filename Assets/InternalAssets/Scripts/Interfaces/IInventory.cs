@@ -9,5 +9,6 @@ namespace Task.Interfaces
         public void DeleteItem(int index);
         public bool InsertItem(IItem item);
         public bool InsertItem(IItem item, int index);
+        public void Clear();
     }
 }

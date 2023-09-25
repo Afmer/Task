@@ -97,7 +97,14 @@ namespace Task.Inventory
         {
             return _items;
         }
-
+        public void Clear()
+        {
+            for (int i = 0; i < _items.Length; i++)
+            {
+                _items[i].Clear();
+                _items[i] = null;
+            }
+        }
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.CompareTag("Item"))

@@ -44,5 +44,12 @@ namespace Task.Inventory
         {
             return _items.Count == 0;
         }
+
+        public void Clear()
+        {
+            foreach(var item in _items)
+                item.Delete();
+            _items = null;
+        }
     }
 }
