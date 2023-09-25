@@ -2,7 +2,7 @@ using Task.Interfaces;
 using UnityEngine;
 namespace Task.Inventory.Item
 {
-    public class Item : MonoBehaviour, IItem, IDropItem
+    public class Item : MonoBehaviour, IItem
     {
         [SerializeField]
         private string _name;
