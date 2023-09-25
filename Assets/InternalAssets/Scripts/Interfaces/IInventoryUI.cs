@@ -4,5 +4,6 @@ namespace Task.Interfaces
     {
         public void OpenInventory();
         public void CloseInventory();
+        public void OpenCloseInventory();
     }
 }

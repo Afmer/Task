@@ -16,7 +16,6 @@ namespace Task.Controllers
         private IInventory _inventory;
         private IMovement _movement;
         private IWeapon _weapon;
-        private bool isInventoryOpen = false;
         void Start()
         {
             if (!_character.TryGetComponent(out _movement))
@@ -50,16 +49,7 @@ namespace Task.Controllers
                 _inventory.PickUp();
             if (IsInventory())
             {
-                if (isInventoryOpen)
-                {
-                    _inventoryUIController.CloseInventory();
-                    isInventoryOpen = false;
-                }
-                else
-                {
-                    _inventoryUIController.OpenInventory();
-                    isInventoryOpen = true;
-                }
+                _inventoryUIController.OpenCloseInventory();
             }
         }
         public abstract Vector2 MoveController();

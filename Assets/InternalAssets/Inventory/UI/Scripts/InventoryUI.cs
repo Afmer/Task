@@ -78,5 +78,12 @@ namespace Task.Inventory.UI
         {
             gameObject.SetActive(false);
         }
+        public void OpenCloseInventory()
+        {
+            if(gameObject.activeSelf)
+                CloseInventory();
+            else
+                OpenInventory();
+        }
     }
 }
