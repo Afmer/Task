@@ -8,8 +8,10 @@ using UnityEngine.SceneManagement;
 
 namespace Task.SaveManager
 {
-    public class SaveHandler : MonoBehaviour
+    public class SaveHandler : MonoBehaviour, ISaveHandler
     {
+        [SerializeField]
+        private string _directorySaves = "/Saves/";
         [SerializeField]
         private GameObject _inventoryObject;
         [SerializeField]
@@ -29,12 +31,6 @@ namespace Task.SaveManager
                 Debug.LogError("Item ids not found", this);
                 throw new Exception("Item ids not found");
             }
-            if (File.Exists(GetSavePath("default")))
-                Load("default");
-        }
-        private void OnApplicationQuit()
-        {
-            Save("default");
         }
         public void Save(string saveName)
         {
@@ -42,12 +38,13 @@ namespace Task.SaveManager
             data.Inventory = GetInventoryData();
             string json = JsonUtility.ToJson(data);
             var datapath = GetSavePath(saveName);
-            if (!Directory.Exists(GetSaveDicrectory))
-                Directory.CreateDirectory(GetSaveDicrectory);
+            if (!Directory.Exists(SaveDirectory))
+                Directory.CreateDirectory(SaveDirectory);
             File.WriteAllText(datapath, json);
         }
-        private string GetSavePath(string saveName) => Application.dataPath + "/Saves/SavedData." + SceneManager.GetActiveScene().buildIndex + '.' + saveName + ".json";
-        private string GetSaveDicrectory => Application.dataPath + "/Saves/";
+        private string GetSavePath(string saveName) => SaveDirectory + saveName + ".json";
+        public string SaveDirectory => Application.dataPath + _directorySaves;
+
         private InventoryData GetInventoryData()
         {
             var data = new InventoryData();
