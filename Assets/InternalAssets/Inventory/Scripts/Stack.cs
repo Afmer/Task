@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace Task.Inventory
 {
-    public class Stack
+    public class Stack : IStack
     {
         private Stack<IItem> _items = new();
         public int MaxSize { get; private set; }
         public int Count => _items.Count;
         public int ItemID { get; private set; }
         public Sprite Icon { get; private set; }
-        public string ItemName;
+        public string ItemName { get; private set; }
         public Stack(IItem item, int size = 64)
         {
             if(size <= 0)

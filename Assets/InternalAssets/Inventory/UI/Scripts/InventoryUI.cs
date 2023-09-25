@@ -39,7 +39,7 @@ namespace Task.Inventory.UI
             CloseInventory();
         }
 
-        private void OnItemDelete(Stack item, int index)
+        private void OnItemDelete(IStackInfo item, int index)
         {
             _inventory.DeleteItem(index);
             if (item.IsEmpty())

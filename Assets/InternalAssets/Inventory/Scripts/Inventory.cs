@@ -13,7 +13,7 @@ namespace Task.Inventory
         [SerializeField]
         private UnityEvent<IItem> _onPickUp;
         public event Action<IItem> OnPickUp;
-        private Stack[] _items;
+        private IStack[] _items;
         private IItem _itemPickUp;
         // Start is called before the first frame update
         void Start()
@@ -76,7 +76,7 @@ namespace Task.Inventory
                 _itemPickUp = null;
             }
         }
-        public Stack[] GetAll()
+        public IStack[] GetAll()
         {
             return _items;
         }

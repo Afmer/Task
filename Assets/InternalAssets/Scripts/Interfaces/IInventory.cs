@@ -5,7 +5,7 @@ namespace Task.Interfaces
     public interface IInventory
     {
         public void PickUp();
-        public Stack[] GetAll();
+        public IStack[] GetAll();
         public void DeleteItem(int index);
     }
 }

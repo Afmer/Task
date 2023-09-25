@@ -16,9 +16,9 @@ namespace Task.Inventory.UI
         [SerializeField]
         private TextMeshProUGUI _count;
         public Button ItemButton { get { return _itemButton; } }
-        private Stack _item;
+        private IStackInfo _item;
         public int Index { get; private set; }
-        public void SetStack(Stack stack, int index)
+        public void SetStack(IStackInfo stack, int index)
         {
             _item = stack;
             _icon.sprite = stack.Icon;
