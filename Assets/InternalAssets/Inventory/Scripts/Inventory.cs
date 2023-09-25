@@ -14,8 +14,7 @@ namespace Task.Inventory
         public event Action<IItem> OnPickUp;
         private IStack[] _items;
         private IItem _itemPickUp;
-        // Start is called before the first frame update
-        void Start()
+        private void Awake()
         {
             OnPickUp += x => { return; };
             _items = new Stack[_inventorySize];
@@ -101,8 +100,11 @@ namespace Task.Inventory
         {
             for (int i = 0; i < _items.Length; i++)
             {
-                _items[i].Clear();
-                _items[i] = null;
+                if (_items[i] != null)
+                {
+                    _items[i].Clear();
+                    _items[i] = null;
+                }
             }
         }
         private void OnTriggerEnter2D(Collider2D collision)
