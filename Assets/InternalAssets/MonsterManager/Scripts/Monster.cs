@@ -8,6 +8,10 @@ namespace Task.MonsterManager
     public class Monster : MonoBehaviour, IHeat, IMonster, ISpawnableEntity
     {
         [SerializeField]
+        private Rigidbody2D _rb;
+        [SerializeField]
+        private float _velocity = 20;
+        [SerializeField]
         private float _health = 100;
         [SerializeField]
         private UnityEvent<float> _onChangeHealth;
@@ -19,11 +23,22 @@ namespace Task.MonsterManager
         public event Action<ISpawnableEntity> OnHeat;
         public event Action<ISpawnableEntity> OnDead;
         public Vector2 Position => new Vector2(transform.position.x, transform.position.y);
+        private Transform _target;
 
         private void Start()
         {
             OnChangeHealth += x => { return; };
             OnHeat += x => { return; };
+        }
+
+        private void FixedUpdate()
+        {
+            if(_target != null )
+            {
+                var direction = (_target.position - transform.position).normalized;
+                var direction2d = new Vector2(direction.x, direction.y) * _velocity * Time.deltaTime;
+                _rb.MovePosition(_rb.position + direction2d);
+            }
         }
         public float Health
         {
@@ -54,6 +69,14 @@ namespace Task.MonsterManager
             else
                 result = Instantiate(this, position, rotation);
             return result;
+        }
+        public void Chase(Transform target)
+        {
+            _target = target;
+        }
+        public void StopChase()
+        {
+            _target = null;
         }
     }
 }
