@@ -1,6 +1,6 @@
 namespace Task.Interfaces
 {
-    public interface IWeapon
+    public interface IWeapon : IWeaponDirection
     {
         public void Shoot();
     }

@@ -51,10 +51,20 @@ namespace Task.Controllers
             {
                 _inventoryUIController.OpenCloseInventory();
             }
+            if(IsLeftFlip())
+            {
+                _movement.LeftFlip();
+            }
+            else if (IsRightFlip())
+            {
+                _movement.RightFlip();
+            }
         }
         public abstract Vector2 MoveController();
         public abstract bool IsShoot();
         public abstract bool IsPickUp();
         public abstract bool IsInventory();
+        public abstract bool IsLeftFlip();
+        public abstract bool IsRightFlip();
     }
 }

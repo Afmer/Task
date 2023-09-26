@@ -70,5 +70,15 @@ namespace Task.Character.Weapon
                 CurrentClip--;
             }
         }
+
+        public void SetLeftDirection()
+        {
+            Direction = BulletDirectionEnum.Left;
+        }
+
+        public void SetRightDirection()
+        {
+            Direction= BulletDirectionEnum.Right;
+        }
     }
 }

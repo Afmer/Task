@@ -5,6 +5,7 @@ namespace Task.Controllers
 {
     public class InputController : AbstractController
     {
+        private bool _isRightFlip = true;
         public override bool IsInventory()
         {
             return Input.GetKeyDown(KeyCode.I);
@@ -13,6 +14,26 @@ namespace Task.Controllers
         public override bool IsPickUp()
         {
             return Input.GetKey(KeyCode.E);
+        }
+        public override bool IsLeftFlip()
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse1) && _isRightFlip)
+            {
+                _isRightFlip = false;
+                return true;
+            }
+            else
+                return false;
+        }
+        public override bool IsRightFlip()
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse1) && !_isRightFlip)
+            {
+                _isRightFlip = true;
+                return true;
+            }
+            else
+                return false;
         }
 
         public override bool IsShoot()
