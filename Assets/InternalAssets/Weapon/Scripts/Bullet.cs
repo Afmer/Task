@@ -70,6 +70,7 @@ namespace Task.Character.Weapon
                 if(collision.gameObject.TryGetComponent(out hitbox))
                 {
                     hitbox.Heat(_damage);
+                    gameObject.SetActive(false);
                 }
             }
         }
