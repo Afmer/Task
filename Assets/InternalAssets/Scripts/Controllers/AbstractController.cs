@@ -1,4 +1,5 @@
 using Task.Interfaces;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 namespace Task.Controllers
 {
@@ -38,6 +39,7 @@ namespace Task.Controllers
                 Debug.LogError("InventoryUIController not found", this);
                 throw new System.Exception("InventoryUIController not found");
             }
+            Init();
         }
         private void Update()
         {
@@ -60,6 +62,7 @@ namespace Task.Controllers
                 _movement.RightFlip();
             }
         }
+        protected virtual void Init() { }
         public abstract Vector2 MoveController();
         public abstract bool IsShoot();
         public abstract bool IsPickUp();
