@@ -32,6 +32,11 @@ namespace Task.SaveManager
                 throw new Exception("Item ids not found");
             }
         }
+        public void Delete(string saveName)
+        {
+            if(File.Exists(GetSavePath(saveName)))
+                File.Delete(GetSavePath(saveName));
+        }
         public void Save(string saveName)
         {
             var data = new SaveData();
