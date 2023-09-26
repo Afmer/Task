@@ -118,6 +118,10 @@ namespace Task.Inventory
                 }
             }
         }
+        private void Update()
+        {
+            PickUp();
+        }
         private void OnTriggerExit2D(Collider2D collision)
         {
             _itemPickUp = null;
