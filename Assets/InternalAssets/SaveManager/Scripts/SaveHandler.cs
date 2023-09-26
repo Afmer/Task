@@ -43,7 +43,20 @@ namespace Task.SaveManager
             File.WriteAllText(datapath, json);
         }
         private string GetSavePath(string saveName) => SaveDirectory + saveName + ".json";
-        public string SaveDirectory => Application.dataPath + _directorySaves;
+        public string SaveDirectory
+        {
+            get
+            {
+                if (Application.platform == RuntimePlatform.Android)
+                {
+                    return Application.persistentDataPath + _directorySaves;
+                }
+                else
+                {
+                    return Application.dataPath + _directorySaves;
+                }
+            }
+        }
 
         private InventoryData GetInventoryData()
         {
@@ -66,6 +79,7 @@ namespace Task.SaveManager
         }
         public void Load(string saveName)
         {
+            var path = GetSavePath(saveName);
             string json = File.ReadAllText(GetSavePath(saveName));
             var data = JsonUtility.FromJson<SaveData>(json);
             LoadInventory(data);
