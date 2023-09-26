@@ -193,6 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bar: {fileID: 736507695288478721}
   _maxHP: 100
+  _object: {fileID: 736507695982257883}
 --- !u!1 &736507694453491802
 GameObject:
   m_ObjectHideFlags: 0
@@ -671,9 +672,10 @@ GameObject:
   - component: {fileID: 736507695982257885}
   - component: {fileID: 736507695982257882}
   - component: {fileID: 162706915008584507}
+  - component: {fileID: 2206166697896648002}
   m_Layer: 0
   m_Name: Monster
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -708,6 +710,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 133e505d4e3fa9a43b81ffcf3605a45b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _collider: {fileID: 2206166697896648002}
   _rb: {fileID: 162706915008584507}
   _velocity: 3
   _health: 100
@@ -752,7 +755,33 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
+--- !u!61 &2206166697896648002
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736507695982257883}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.15890944, y: -0.033764005}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.7031844, y: 1.6232872}
+  m_EdgeRadius: 0
 --- !u!1 &6175215095668934792
 GameObject:
   m_ObjectHideFlags: 0

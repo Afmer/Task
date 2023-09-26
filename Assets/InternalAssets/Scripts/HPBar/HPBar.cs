@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Task.Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,9 +12,21 @@ namespace HPBar
         private Image _bar;
         [SerializeField]
         private float _maxHP;
-        public void OnChangeHealth(float healt)
+        [SerializeField]
+        private GameObject _object;
+        private IHealth _healthObject;
+        private void Awake()
         {
-            _bar.fillAmount = healt / _maxHP;
+            if(!_object.TryGetComponent(out _healthObject))
+            {
+                Debug.LogError("Health object not found", this);
+                throw new System.Exception("Health object not found");
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            _bar.fillAmount =  _healthObject.Health / _maxHP;
         }
     }
 }

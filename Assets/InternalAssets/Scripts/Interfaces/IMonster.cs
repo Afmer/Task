@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Task.Interfaces
 {
-    public interface IMonster
+    public interface IMonster : IHealth
     {
         public void Chase(Transform target);
         public void StopChase();

@@ -7,6 +7,7 @@ TagManager:
   - MainPlayer
   - Hitbox
   - Item
+  - Monster
   layers:
   - Default
   - TransparentFX
