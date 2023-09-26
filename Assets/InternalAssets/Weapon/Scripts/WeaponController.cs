@@ -28,8 +28,6 @@ namespace Task.Character.Weapon
         private int _clip = 30;
         [SerializeField]
         private float _reloadTime = 3;
-        private bool _isReloading = false;
-        private float _timeForReload = 0;
         public int CurrentClip { get; private set; }
         private float _timeForNextShoot;
         private LinkedListNode<Bullet> _currentBullet;
@@ -47,18 +45,11 @@ namespace Task.Character.Weapon
         }
         public void Shoot()
         {
-            if (CurrentClip <= 0 && _isReloading == false)
+            if (CurrentClip <= 0)
             {
-                _isReloading = true;
-                _timeForReload = Time.time + _reloadTime;
+                Reload();
             }
-            if(_isReloading && Time.time > _timeForReload)
-            {
-                _timeForReload = 0;
-                _isReloading = false;
-                CurrentClip = _clip;
-            }
-            if (Time.time > _timeForNextShoot && !_isReloading)
+            if (Time.time > _timeForNextShoot && CurrentClip > 0)
             {
                 _currentBullet.Value.transform.position = _bulletSpawn.position;
                 _currentBullet.Value.Launch(Direction, _bulletSpeed, _damage);
@@ -70,7 +61,25 @@ namespace Task.Character.Weapon
                 CurrentClip--;
             }
         }
-
+        private IEnumerator ReloadCoroutine()
+        {
+            var timeForReload = Time.time + _reloadTime;
+            while(true)
+            {
+                if (Time.time <= timeForReload)
+                {
+                    yield return null;
+                    continue;
+                }
+                else
+                    break;
+            }
+            CurrentClip = _clip;
+        }
+        public void Reload()
+        {
+            StartCoroutine(ReloadCoroutine());
+        }
         public void SetLeftDirection()
         {
             Direction = BulletDirectionEnum.Left;
